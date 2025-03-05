@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Join Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Join a Chat, {{ name }}!</h1>
+        <p>Enter the chat code:</p>
+        <form method="POST">
+            <input type="text" name="code" placeholder="Chat Code" required>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+            <button type="submit">Join</button>
+        </form>
+    </div>
+</body>
+</html>

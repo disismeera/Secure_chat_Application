@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const code = "{{ code }}";
+        const name = "{{ name }}";
+
+        // Join the room on page load
+        socket.emit('join', { code: code });
+
+        // Handle new messages
+        socket.on('new_message', function(data) {
+            const messagesDiv = document.getElementById('messages');
+            const p = document.createElement('p');
+            p.innerHTML = `<strong>${data.sender}:</strong> ${data.message}`;
+            messagesDiv.appendChild(p);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll to bottom
+        });
+
+        // Send message
+        function sendMessage() {
+            const message = document.getElementById('message').value.trim();
+            if (message) {
+                socket.emit('send_message', { code: code, name: name, message: message });
+                document.getElementById('message').value = ''; // Clear input
+            }
+        }
+
+        // Send message on Enter key
+        document.getElementById('message').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Chat Room (Code: {{ code }})</h1>
+        <p>Invite others with this code: <strong>{{ code }}</strong></p>
+        <div class="messages" id="messages">
+            {% if messages %}
+                {% for sender, message in messages %}
+                    <p><strong>{{ sender }}:</strong> {{ message }}</p>
+                {% endfor %}
+            {% else %}
+                <p class="note">No messages yet. Start chatting!</p>
+            {% endif %}
+        </div>
+        <textarea id="message" placeholder="Type your message..." required></textarea>
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Start New Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Start a New Chat, {{ name }}!</h1>
+        <p>Click below to create a new chat room:</p>
+        <form method="POST">
+            <button type="submit">Create Chat Room</button>
+        </form>
+    </div>
+</body>
+</html>

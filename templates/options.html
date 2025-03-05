@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Options</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Hello, {{ name }}!</h1>
+        <p>What would you like to do?</p>
+        <a href="{{ url_for('new_chat', name=name) }}" class="button">Start a New Chat</a>
+        <a href="{{ url_for('join_chat', name=name) }}" class="button">Enter a Chat Using a Code</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Your Name</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome!</h1>
+        <p>Please enter your name to continue:</p>
+        <form method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
+            <button type="submit">Next</button>
+        </form>
+    </div>
+</body>
+</html>
