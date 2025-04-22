@@ -36,7 +36,7 @@ This is a Flask-based secure chat application that allows users to create or joi
     python -c "from app import init_db; init_db()"
     ```
 
-## Usage
+## Usage 
 
 1. Run the application:
     ```bash
